@@ -2,6 +2,11 @@ package br.com.michelmilezzi.yapott.model;
 
 import com.beust.jcommander.Parameter;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Settings {
 
     @Parameter(names = "-D", description = "Caminho para o arquivo de configuração", required = true)
@@ -33,85 +38,5 @@ public class Settings {
 
     @Parameter(names = "-restore", description = "Criar regras somente para modo de restore")
     private boolean restore = false;
-    
-    public String getConfigFile() {
-        return configFile;
-    }
-
-    public void setConfigFile(String configFile) {
-        this.configFile = configFile;
-    }
-
-    public boolean isConservative() {
-        return conservative;
-    }
-
-    public void setConservative(boolean conservative) {
-        this.conservative = conservative;
-    }
-
-    public boolean isPostgres95() {
-        return postgres95;
-    }
-
-    public void setPostgres95(boolean postgres95) {
-        this.postgres95 = postgres95;
-    }
-
-    public boolean isPostgres83() {
-        return postgres83;
-    }
-
-    public void setPostgres83(boolean postgres83) {
-        this.postgres83 = postgres83;
-    }
-
-    public boolean isArch64() {
-        return arch64;
-    }
-
-    public void setArch64(boolean arch64) {
-        this.arch64 = arch64;
-    }
-
-    public boolean isArch32() {
-        return arch32;
-    }
-
-    public void setArch32(boolean arch32) {
-        this.arch32 = arch32;
-    }
-
-    public Long getPort() {
-        return port;
-    }
-
-    public void setPort(Long port) {
-        this.port = port;
-    }
-
-    public boolean isProduction() {
-        return production;
-    }
-
-    public void setProduction(boolean production) {
-        this.production = production;
-    }
-
-    public boolean isDump() {
-        return dump;
-    }
-
-    public void setDump(boolean dump) {
-        this.dump = dump;
-    }
-
-    public boolean isRestore() {
-        return restore;
-    }
-
-    public void setRestore(boolean restore) {
-        this.restore = restore;
-    }
     
 }

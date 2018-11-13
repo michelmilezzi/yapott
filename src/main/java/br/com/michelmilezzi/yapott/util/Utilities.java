@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,17 +20,15 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import br.com.michelmilezzi.yapott.exception.YapottException;
 import br.com.michelmilezzi.yapott.model.Config;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public final class Utilities {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Utilities.class);
-    
     private Utilities() {
+    	//NOP
     }
 
     public static void writeToFile(final File mirrorFile, final String fileToWrite, final List<Config> configs) throws YapottException {
@@ -69,7 +66,7 @@ public final class Utilities {
                 try {
                     out.close();
                 } catch (Exception e) {
-                    LOGGER.error("| Unexpected error. ", e);
+                    log.error("| Unexpected error. ", e);
                 }
             }
 
@@ -77,7 +74,7 @@ public final class Utilities {
                 try {
                     in.close();
                 } catch (Exception e) {
-                    LOGGER.error("| Unexpected error. ", e);
+                    log.error("| Unexpected error. ", e);
                 }
             }
             
@@ -85,7 +82,7 @@ public final class Utilities {
                 try {
                     fileWriter.close();
                 } catch (Exception e) {
-                    LOGGER.error("| Unexpected error. ", e);
+                    log.error("| Unexpected error. ", e);
                 }
             }
             
@@ -93,7 +90,7 @@ public final class Utilities {
                 try {
                     fileReader.close();
                 } catch (Exception e) {
-                    LOGGER.error("| Unexpected error. ", e);
+                    log.error("| Unexpected error. ", e);
                 }
             }            
 
@@ -170,11 +167,11 @@ public final class Utilities {
     }
     
     private static String createBackupFilename(final String fileToWrite) {
-        return MessageFormat.format("{0}.{1}", fileToWrite, new SimpleDateFormat("yyyyMMddHms").format(new Date()));
+        return String.format("%s.%s", fileToWrite, new SimpleDateFormat("yyyyMMddHms").format(new Date()));
     }
     
     private static String outputConfig(String key, String value) {
-        return MessageFormat.format("{0} = {1}\t\t\t# changed by yapott", key, value);
+        return String.format("%s = %s\t\t\t# changed by yapott", key, value);
     }
     
 }

@@ -3,7 +3,11 @@ package br.com.michelmilezzi.yapott.model;
 import br.com.michelmilezzi.yapott.enumeration.ConfigMode;
 import br.com.michelmilezzi.yapott.enumeration.ServerMode;
 import br.com.michelmilezzi.yapott.model.config.ServerInstance;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Environment {
 
     private OperatingSystem os;
@@ -18,26 +22,6 @@ public class Environment {
         this.os = os;
         this.serverInstance = serverInstance;
         this.totalRam = totalRam;
-    }
-
-    public OperatingSystem getOs() {
-        return os;
-    }
-
-    public ConfigMode getConfigMode() {
-        return configMode;
-    }
-
-    public ServerMode getServerMode() {
-        return serverMode;
-    }
-
-    public Long getTotalRam() {
-        return totalRam;
-    }
-
-    public ServerInstance getServerInstance() {
-        return serverInstance;
     }
 
     public boolean isConfigModeNormal() {
@@ -64,20 +48,4 @@ public class Environment {
         return getOs().is32() || getServerInstance().is32();
     }
 
-    public void setConfigMode(ConfigMode configMode) {
-        this.configMode = configMode;
-    }
-
-    public void setServerMode(ServerMode serverMode) {
-        this.serverMode = serverMode;
-    }
-
-    public Long getPort() {
-        return port;
-    }
-
-    public void setPort(Long port) {
-        this.port = port;
-    }
-    
 }

@@ -1,11 +1,7 @@
 package br.com.michelmilezzi.yapott.api;
 
 import java.io.File;
-import java.text.MessageFormat;
 import java.util.List;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.ParameterException;
@@ -22,10 +18,11 @@ import br.com.michelmilezzi.yapott.model.config.ServerInstance;
 import br.com.michelmilezzi.yapott.service.EnvironmentService;
 import br.com.michelmilezzi.yapott.service.ServerInstanceService;
 import br.com.michelmilezzi.yapott.util.Utilities;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Yapott {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(Yapott.class);
     private static final String PROGRAM_NAME = "Yapott";
 
     private Yapott() {
@@ -39,10 +36,10 @@ public class Yapott {
         } catch (ParameterException e) {
             JCommander commander = new JCommander(new Settings());
             commander.setProgramName(PROGRAM_NAME);
-            LOGGER.error("| Invalid parameter detected. ", e);
+            log.error("| Invalid parameter detected. ", e);
             commander.usage();
         } catch (Exception e) {
-            LOGGER.error("| Unexpected error. ", e);
+            log.error("| Unexpected error. ", e);
             throw e;
         }        
         
@@ -50,9 +47,10 @@ public class Yapott {
     
     private static void run(String[] args) throws YapottException {
         Settings settings = new Settings();
+        //TODO must solve this warning in future
         JCommander commander = new JCommander(settings, args);
-        LOGGER.info("| Initializing Yapott. ");
-        LOGGER.info("| ", commander);
+        log.info("| Initializing Yapott. ");
+        log.info("| ", commander);
         executeCommand(settings);
     }
     
@@ -63,10 +61,10 @@ public class Yapott {
         final ServerInstance serverInstance = createServerInstance(settings);
         final Environment env = createEnvironment(settings, serverInstance);
         
-        LOGGER.info(MessageFormat.format("| OS: {0}", env.getOs().getEngine()));
-        LOGGER.info(MessageFormat.format("| OS Arch: {0}", env.getOs().getArchitecture()));
-        LOGGER.info(MessageFormat.format("| Memory: {0}", env.getTotalRam()));
-        LOGGER.info(MessageFormat.format("| Config Mode: {0}", env.getConfigMode()));
+        log.info("| OS: {}", env.getOs().getEngine());
+        log.info("| OS Arch: {}", env.getOs().getArchitecture());
+        log.info("| Memory: {}", env.getTotalRam());
+        log.info("| Config Mode: {}", env.getConfigMode());
         
         File backupFile = Utilities.createBackupFile(settings.getConfigFile());
         
@@ -87,9 +85,9 @@ public class Yapott {
     private static void writeConfigs(final Environment env, final ServerMode serverMode, final File backupFile, final String fileToWrite) throws YapottException {
         env.setServerMode(serverMode);
         List<Config> configs = ServerInstanceService.getInstance().configure(env);
-        LOGGER.info(MessageFormat.format("|---Server Mode: {0}", env.getServerMode()));
+        log.info("|---Server Mode: {}", env.getServerMode());
         for (Config config : configs) {
-            LOGGER.info(MessageFormat.format("| {0} - {1}", config.getName(), config.getFormatedSetting()));
+            log.info("| {} - {}", config.getName(), config.getFormatedSetting());
         }
         Utilities.writeToFile(backupFile, fileToWrite, configs);
     }

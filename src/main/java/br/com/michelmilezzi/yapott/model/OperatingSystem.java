@@ -2,7 +2,9 @@ package br.com.michelmilezzi.yapott.model;
 
 import br.com.michelmilezzi.yapott.enumeration.Architecture;
 import br.com.michelmilezzi.yapott.enumeration.OperatingSystemEngine;
+import lombok.Getter;
 
+@Getter
 public class OperatingSystem {
 
     private OperatingSystemEngine engine;
@@ -30,12 +32,4 @@ public class OperatingSystem {
         return Architecture.ARC_32 == architecture;
     }
 
-    public OperatingSystemEngine getEngine() {
-        return engine;
-    }
-
-    public Architecture getArchitecture() {
-        return architecture;
-    }
-    
 }

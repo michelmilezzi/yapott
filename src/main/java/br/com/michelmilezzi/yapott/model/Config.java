@@ -1,5 +1,10 @@
 package br.com.michelmilezzi.yapott.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public abstract class Config {
 
     private String name;
@@ -11,22 +16,6 @@ public abstract class Config {
         this.name = name;
         this.env = env;
         resolveSetting();
-    }
-
-    public String getName() {
-        return name;
-    }
-    
-    public String getSetting() {
-        return setting;
-    }
-    
-    public Environment getEnv() {
-        return env;
-    }
-
-    public void setSetting(String setting) {
-        this.setting = setting;
     }
     
     public abstract String getFormatedSetting();
