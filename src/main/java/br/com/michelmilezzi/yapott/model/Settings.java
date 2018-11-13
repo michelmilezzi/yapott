@@ -9,34 +9,34 @@ import lombok.Setter;
 @Setter
 public class Settings {
 
-    @Parameter(names = "-D", description = "Caminho para o arquivo de configuração", required = true)
+    @Parameter(names = "-D", description = "Path to PostgreSQL's configuration file", required = true)
     private String configFile;
 
-    @Parameter(names = "-conservative", description = "Modo conservador")
+    @Parameter(names = "-conservative", description = "Use non-aggressive rules")
     private boolean conservative = false;
 
-    @Parameter(names = "-v95", description = "Executar tuning com as regras do PostgreSQL 9.5")
+    @Parameter(names = "-v95", description = "Use PostgreSQL 9.5 rules")
     private boolean postgres95 = false;
 
-    @Parameter(names = "-v83", description = "Executar tuning com as regras do PostgreSQL 8.3")
+    @Parameter(names = "-v83", description = "Use PostgreSQL 8.3 rules")
     private boolean postgres83 = false;
 
-    @Parameter(names = "-64", description = "Executar tuning com as regras para arquitetura 64 do PostgreSQL")
+    @Parameter(names = "-64", description = "Use PostgreSQL 64-bit rules")
     private boolean arch64 = false;
 
-    @Parameter(names = "-32", description = "Executar tuning com as regras para arquitetura 32 do PostgreSQL")
+    @Parameter(names = "-32", description = "Use PostgreSQL 32-bit rules")
     private boolean arch32 = false;
 
-    @Parameter(names = "-p", description = "Configuração da porta que irá sobreescrever a existente")
+    @Parameter(names = "-p", description = "Server port")
     private Long port;    
     
-    @Parameter(names = "-production", description = "Criar regras somente para modo de produção")
+    @Parameter(names = "-production", description = "Improve production performance")
     private boolean production = false;
     
-    @Parameter(names = "-dump", description = "Criar regras somente para modo de dump")
+    @Parameter(names = "-dump", description = "Improve dump speed")
     private boolean dump = false;
 
-    @Parameter(names = "-restore", description = "Criar regras somente para modo de restore")
+    @Parameter(names = "-restore", description = "Improve restore performance")
     private boolean restore = false;
     
 }
